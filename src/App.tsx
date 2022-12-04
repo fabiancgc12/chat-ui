@@ -1,12 +1,15 @@
+import { MantineProvider } from '@mantine/core'
 import { useState } from 'react'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
-      hello
-    </div>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <div>
+          hello
+        </div>
+      </MantineProvider>
   )
 }
 
