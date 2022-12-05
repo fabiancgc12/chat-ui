@@ -5,10 +5,15 @@ import io from 'socket.io-client';
 const SERVER = "http://localhost:8000"
 const socket = io(SERVER);
 
+type MessageType = {
+    message:string,
+    user:string
+}
+
 function App() {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [message,setMessage] = useState("")
-    const [chat,setChat] = useState<string[]>([])
+    const [chat,setChat] = useState<MessageType[]>([])
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -19,9 +24,8 @@ function App() {
             setIsConnected(false);
         });
 
-        socket.on("message",(msg) => {
-            console.log(msg)
-            setChat([...chat,msg])
+        socket.on("message",(msg:MessageType) => {
+            setChat(chat => [...chat,msg])
         })
 
         return () => {
@@ -30,18 +34,26 @@ function App() {
             socket.off('message');
         };
     }, []);
+    console.log(chat)
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        socket.emit('message',message)
+        const newMessage = {
+            message,
+            user:socket.id
+        }
+        socket.emit('message', message)
         setMessage("")
+        setChat([...chat,newMessage])
     }
-
-
   return (
       <MantineProvider withGlobalStyles withNormalizeCSS>
           <div>
-              {chat.map(msg => <p>{msg}</p>)}
+              {chat.map((msg,i) => {
+                  return (
+                          <p key={`user-${msg.user}-${i}`}>{msg.user}: {msg.message}</p>
+                      )
+              })}
           </div>
           <form onSubmit={onSubmit}>
                   <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}/>
