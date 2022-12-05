@@ -7,7 +7,8 @@ const socket = io(SERVER);
 
 function App() {
     const [isConnected, setIsConnected] = useState(socket.connected);
-    const [lastPong, setLastPong] = useState("");
+    const [message,setMessage] = useState("")
+    const [chat,setChat] = useState<string[]>([])
 
     useEffect(() => {
         socket.on('connect', () => {
@@ -18,28 +19,34 @@ function App() {
             setIsConnected(false);
         });
 
-        socket.on('pong', () => {
-            setLastPong(new Date().toISOString());
-        });
+        socket.on("message",(msg) => {
+            console.log(msg)
+            setChat([...chat,msg])
+        })
 
         return () => {
             socket.off('connect');
             socket.off('disconnect');
-            socket.off('pong');
+            socket.off('message');
         };
     }, []);
 
-    const sendPing = () => {
-        socket.emit('ping');
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        socket.emit('message',message)
+        setMessage("")
     }
+
 
   return (
       <MantineProvider withGlobalStyles withNormalizeCSS>
           <div>
-              <p>Connected: { '' + isConnected }</p>
-              <p>Last pong: { lastPong || '-' }</p>
-              <button onClick={ sendPing }>Send ping</button>
+              {chat.map(msg => <p>{msg}</p>)}
           </div>
+          <form onSubmit={onSubmit}>
+                  <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                  <button type="submit">Send</button>
+              </form>
       </MantineProvider>
   )
 }
