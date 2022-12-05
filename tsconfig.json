@@ -20,7 +20,8 @@
       "@/assets/*": ["assets/*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/global/*": ["global/*"]
     }
   },
   "include": ["src"],
