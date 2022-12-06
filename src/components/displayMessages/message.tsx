@@ -22,7 +22,15 @@ export function Message({msg}:props){
         >
             <Text fz="xs">{msg.user}</Text>
             <Text fz="md">{msg.message}</Text>
-            <Text fz={"xs"} ta={"right"}>{msg.timeStamp}</Text>
+            <Text fz={"xs"} ta={"right"}>{formatTime(msg.timeStamp)}</Text>
         </Box>
         )
+}
+
+function formatTime(ms:number){
+    const date = new Date(ms);
+    const timeOfDay = date.getHours() >= 12 ? "pm" : "am"
+    const hours = (date.getHours() % 12 || 12).toString().padStart(2,"0");
+    const minutes = date.getMinutes().toString().padStart(2,"0")
+    return `${hours}:${minutes} ${timeOfDay}`
 }
