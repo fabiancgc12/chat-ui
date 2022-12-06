@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import io from "socket.io-client";
-import {MessageType} from "@/utils/types/Message.type";
+import {MessageModel} from "@/utils/models/MessageModel";
 import {useSetAtom} from "jotai";
 import {messagesAtom} from "@/global/messages.atom";
 
@@ -19,7 +19,7 @@ export function useStartSocket(){
             setIsConnected(false);
         });
 
-        socket.on("message",(msg:MessageType) => {
+        socket.on("message",(msg:MessageModel) => {
             setChat(chat => [...chat,msg])
         })
 

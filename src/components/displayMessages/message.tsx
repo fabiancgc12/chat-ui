@@ -1,10 +1,10 @@
 import React from "react";
-import {MessageType} from "@/utils/types/Message.type";
+import {MessageModel} from "@/utils/models/MessageModel";
 import {Box, Text} from "@mantine/core";
 import {socket} from "@/hooks/useStartSocket";
 
 type props = {
-    msg:MessageType
+    msg:MessageModel
 }
 export function Message({msg}:props){
     return (

@@ -1,4 +1,4 @@
 import {atom} from "jotai";
-import {MessageType} from "@/utils/types/Message.type";
+import {MessageModel} from "@/utils/models/MessageModel";
 
-export const messagesAtom = atom<MessageType[]>([]);
+export const messagesAtom = atom<MessageModel[]>([]);
