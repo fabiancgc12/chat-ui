@@ -10,7 +10,8 @@ export function MessageForm(){
         e.preventDefault();
         const newMessage = {
             message,
-            user:socket.id
+            user:socket.id,
+            timeStamp:new Date().getTime()
         }
         socket.emit('message', message)
         setMessage("")
