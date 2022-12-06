@@ -10,6 +10,7 @@ export function MessageForm(){
     const [message,setMessage] = useState("")
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (message.trim().length == 0 ) return
         const newMessage = new MessageModel(message,socket.id)
         socket.emit('message', message)
         setMessage("")
