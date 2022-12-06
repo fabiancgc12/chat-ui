@@ -8,7 +8,7 @@ function App() {
     useStartSocket()
     return (
       <MantineProvider withGlobalStyles withNormalizeCSS>
-          <Stack justify="flex-start">
+          <Stack justify="space-between" mih={"100vh"}>
               <DisplayMessages/>
               <MessageForm/>
           </Stack>
