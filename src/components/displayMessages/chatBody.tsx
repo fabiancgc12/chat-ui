@@ -5,7 +5,7 @@ import {Message} from "@/components/displayMessages/message";
 import {Container, Stack} from "@mantine/core";
 import {useWindowScroll} from "@mantine/hooks";
 
-export function DisplayMessages(){
+export function ChatBody(){
     const [chat,setChat] = useAtom(messagesAtom)
     const ref = useRef<HTMLDivElement>(null)
 
