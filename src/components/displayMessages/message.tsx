@@ -7,23 +7,33 @@ type props = {
     msg:MessageModel
 }
 export function Message({msg}:props){
+    let alignMessage = "start"
+    let alignName:"start" | "end" = "start"
+    let bg = "gray.7"
+    let name = msg.user
+    if (msg.user == socket.id){
+        alignMessage = "end"
+        alignName = "end"
+        bg = "green.9"
+        name = "You"
+    }
     return (
         <Box
             sx={theme => ({
-                alignSelf: msg.user == socket.id ? "end" : "start",
+                alignSelf: alignMessage,
             })}
             miw={"20%"}
             maw={"75%"}
         >
-            <Text fz="xs" ta={msg.user == socket.id ? "right" : "end"}>{msg.user}</Text>
+            <Text fz="xs" ta={alignName}>{name}</Text>
             <Box
                 sx={theme => ({
                     borderRadius: "5px",
-                    backgroundColor: msg.user == socket.id  ? theme.colors.green[9] : theme.colors.gray[7]
                 })}
                 px={"sm"}
                 c={"gray.0"}
                 py={4}
+                bg={bg}
             >
                 <Text fz="md">{msg.message}</Text>
                 <Text fz={"xs"} ta={"right"}>{formatTime(msg.timeStamp)}</Text>
