@@ -35,7 +35,7 @@ export function Message({msg}:props){
                 py={4}
                 bg={bg}
             >
-                <Text fz="md">{msg.message}</Text>
+                <Text fz="md" sx={{wordBreak: "break-all"}}>{msg.message}</Text>
                 <Text fz={"xs"} ta={"right"}>{formatTime(msg.timeStamp)}</Text>
             </Box>
         </Box>
