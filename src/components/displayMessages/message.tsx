@@ -11,18 +11,23 @@ export function Message({msg}:props){
         <Box
             sx={theme => ({
                 alignSelf: msg.user == socket.id ? "end" : "start",
-                borderRadius: "5px",
-                backgroundColor: msg.user == socket.id  ? theme.colors.green[9] : theme.colors.gray[7]
             })}
             miw={"20%"}
-            maw={"65%"}
-            px={"sm"}
-            c={"gray.0"}
-            py={4}
+            maw={"75%"}
         >
-            <Text fz="xs">{msg.user}</Text>
-            <Text fz="md">{msg.message}</Text>
-            <Text fz={"xs"} ta={"right"}>{formatTime(msg.timeStamp)}</Text>
+            <Text fz="xs" ta={msg.user == socket.id ? "right" : "end"}>{msg.user}</Text>
+            <Box
+                sx={theme => ({
+                    borderRadius: "5px",
+                    backgroundColor: msg.user == socket.id  ? theme.colors.green[9] : theme.colors.gray[7]
+                })}
+                px={"sm"}
+                c={"gray.0"}
+                py={4}
+            >
+                <Text fz="md">{msg.message}</Text>
+                <Text fz={"xs"} ta={"right"}>{formatTime(msg.timeStamp)}</Text>
+            </Box>
         </Box>
         )
 }
