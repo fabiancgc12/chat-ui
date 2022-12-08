@@ -2,8 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef} from "react";
 import {useAtom} from "jotai";
 import {messagesAtom} from "@/global/messages.atom";
 import {Message} from "@/components/displayMessages/message";
-import {Container, Stack} from "@mantine/core";
-import {useWindowScroll} from "@mantine/hooks";
+import {Stack} from "@mantine/core";
 
 export function ChatBody(){
     const [chat,setChat] = useAtom(messagesAtom)
