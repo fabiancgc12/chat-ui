@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useRef} from "react";
+import React, {useLayoutEffect, useRef} from "react";
 import {useAtom} from "jotai";
 import {messagesAtom} from "@/global/messages.atom";
 import {Message} from "@/components/displayMessages/message";
