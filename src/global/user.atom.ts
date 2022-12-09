@@ -1,4 +1,3 @@
-import {atom} from "jotai";
-import {MessageModel} from "@/utils/models/MessageModel";
+import {atomWithStorage} from "jotai/utils";
 
-export const userAtom = atom<string|undefined>("username");
+export const userAtom = atomWithStorage<string|undefined>("username",undefined);
