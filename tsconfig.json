@@ -21,7 +21,8 @@
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/utils/*": ["utils/*"],
-      "@/global/*": ["global/*"]
+      "@/global/*": ["global/*"],
+      "@/pages/*": ["pages/*"]
     }
   },
   "include": ["src"],

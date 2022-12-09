@@ -1,25 +1,20 @@
 import React from 'react'
-import {AppShell, Flex, MantineProvider, Stack} from '@mantine/core'
+import { MantineProvider } from '@mantine/core'
 import {useStartSocket} from "@/hooks/useStartSocket";
-import {MessageForm} from "@/components/messageForm/messageForm";
-import {ChatBody} from "@/components/displayMessages/chatBody";
-import {AppHeader} from "@/components/layout/header";
-import {AppNavBar} from "@/components/layout/Aside";
+import {ChatPage} from "@/pages/ChatPage";
+import {BrowserRouter, Route, Routes } from 'react-router-dom';
+import {LoginPage} from "@/pages/Login";
 
 function App() {
     useStartSocket()
     return (
       <MantineProvider withGlobalStyles withNormalizeCSS>
-          <AppShell
-            asideOffsetBreakpoint="sm"
-            navbar={<AppHeader/>}
-            aside={<AppNavBar/>}
-          >
-              <Stack justify="space-between" mih={"100vh"}>
-                  <ChatBody/>
-                  <MessageForm/>
-              </Stack>
-          </AppShell>
+          <BrowserRouter>
+              <Routes>
+                  <Route path={"/"} element={<ChatPage/>}/>
+                  <Route path={"/login"} element={<LoginPage/>}/>
+              </Routes>
+          </BrowserRouter>
 
       </MantineProvider>
   )
