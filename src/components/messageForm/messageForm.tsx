@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {socket} from "@/hooks/useStartSocket";
 import {useAtom, useSetAtom} from "jotai";
 import {messagesAtom} from "@/global/messages.atom";
 import {Box, Button, Container, Flex, TextInput} from "@mantine/core";
 import {MessageModel} from "../../../../chat-server/src/utils/MessageModel";
+import {useSocket} from "@/global/socketContext";
 
 export function MessageForm(){
+    const socket = useSocket()
     const setChat = useSetAtom(messagesAtom)
     const [message,setMessage] = useState("")
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,12 +1,13 @@
 import React from "react";
 import {MessageModel} from "@/utils/models/MessageModel";
 import {Box, Text} from "@mantine/core";
-import {socket} from "@/hooks/useStartSocket";
+import {useSocket} from "@/global/socketContext";
 
 type props = {
     msg:MessageModel
 }
 export function Message({msg}:props){
+    const socket = useSocket()
     let alignMessage = "start"
     let alignName:"start" | "end" = "start"
     let bg = "gray.7"
