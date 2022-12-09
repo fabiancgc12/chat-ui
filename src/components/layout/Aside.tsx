@@ -1,7 +1,8 @@
 import React from "react";
-import {MediaQuery, Navbar, Text, Title} from "@mantine/core";
+import {List, MediaQuery, Navbar, Stack, Text, Title} from "@mantine/core";
 import {useAtom} from "jotai";
 import {usersAtom} from "@/global/users.atom";
+import {UserNavItem} from "@/components/userNavItem/userNavItem";
 
 export function AppNavBar(){
     const [users] = useAtom(usersAtom)
@@ -12,9 +13,9 @@ export function AppNavBar(){
                     <Title order={3} align={"center"}>Contacts</Title>
                 </Navbar.Section>
                 <Navbar.Section>
-                    <ul>
-                        {users.map(u => <li key={u}>{u}</li>)}
-                    </ul>
+                    <Stack>
+                        {users.map(u => <UserNavItem username={u} key={u} />)}
+                    </Stack>
                 </Navbar.Section>
             </Navbar>
         </MediaQuery>
