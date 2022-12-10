@@ -22,17 +22,20 @@ export function LoginForm(){
                 method:"post",
                 body: JSON.stringify(body)
             });
+            if (!res?.ok) throw new Error("User already exist")
             const data = await res.json()
             setUser(data.username)
             navigate('/');
         } catch (e){
-            setError("Something went wrong")
+            // @ts-ignore
+            if (e?.message == "User already exist") setError(e.message)
+            else setError("Something went wrong")
         }
     }
     return (
         <form onSubmit={onSubmit}>
             <TextInput value={username} onChange={(e) => setUsername(e.target.value)}/>
-            {error && <Text>{error}</Text>}
+            {error && <Text c={"red.8"}>{error}</Text>}
         </form>
     )
 }
