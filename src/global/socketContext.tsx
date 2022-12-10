@@ -35,7 +35,7 @@ export function SocketProvider({children}:props){
     )
 }
 
-export function useStartSocket(socket:ReturnType<typeof io>,username:string | null){
+export function useStartSocket(socket:ReturnType<typeof io>,username:string | undefined){
     const [isConnected, setIsConnected] = useState(socket.connected);
     const setChat = useSetAtom(messagesAtom)
     const setUsers = useSetAtom(usersAtom)

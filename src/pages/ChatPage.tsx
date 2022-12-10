@@ -14,7 +14,7 @@ export function ChatPage(){
                 navbar={<AppHeader/>}
                 aside={<AppNavBar/>}
             >
-                <Stack justify="space-between" mih={"100vh"}>
+                <Stack justify="space-between" h={"100%"}>
                     <ChatBody/>
                     <MessageForm/>
                 </Stack>
