@@ -29,7 +29,7 @@ export function AppHeader({opened,setOpened}:props){
                     </Button>
                     <MediaQuery largerThan="sm" styles={{ display: 'none'}}>
                         <Burger
-                            opened={opened}
+                            opened={!opened}
                             onClick={() => setOpened((o) => !o)}
                             size="sm"
                             c={"gray.3"}
