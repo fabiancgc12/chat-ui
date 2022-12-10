@@ -5,6 +5,7 @@ import {useAtom, useSetAtom} from "jotai";
 import {userAtom} from "@/global/user.atom";
 import {RESET} from "jotai/utils";
 import {usersAtom} from "@/global/users.atom";
+import {whoIsTypingAtom} from "@/global/isTyping.atom";
 
 type props = {
     opened:boolean,
@@ -15,6 +16,7 @@ export function AppHeader({opened,setOpened}:props){
     const socket = useSocket()
     const setUser = useSetAtom(userAtom)
     const setUsersList = useSetAtom(usersAtom)
+    const setWhoIsTyping = useSetAtom(whoIsTypingAtom)
     return (
         <Header height={70} p={"xs"} sx={{display:"flex",alignItems:"center"}}>
             <Flex align={"center"} justify={"space-between"} w={"100%"}>
@@ -23,6 +25,7 @@ export function AppHeader({opened,setOpened}:props){
                     <Button color="red" onClick={() => {
                         setUser(RESET)
                         setUsersList([])
+                        setWhoIsTyping(new Set([]))
                         socket.disconnect()
                     }}>
                         LogOut

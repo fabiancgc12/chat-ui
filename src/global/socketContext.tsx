@@ -6,6 +6,7 @@ import {messagesAtom} from "@/global/messages.atom";
 import { useNavigate } from "react-router-dom";
 import {usersAtom} from "@/global/users.atom";
 import {userAtom} from "@/global/user.atom";
+import {whoIsTypingAtom} from "@/global/isTyping.atom";
 
 export const SERVER = "http://localhost:8000"
 
@@ -39,6 +40,7 @@ export function useStartSocket(socket:ReturnType<typeof io>,username:string | un
     const [isConnected, setIsConnected] = useState(socket.connected);
     const setChat = useSetAtom(messagesAtom)
     const setUsers = useSetAtom(usersAtom)
+    const setIsTyping = useSetAtom(whoIsTypingAtom)
     useEffect(() => {
         socket.on('connect', () => {
             //requesting users
@@ -55,8 +57,23 @@ export function useStartSocket(socket:ReturnType<typeof io>,username:string | un
         })
 
         socket.on("userList", (users:string[]) => {
-            console.log(users)
             setUsers(users)
+        })
+
+        socket.on("isTyping", (user:string) => {
+            setIsTyping(prev => {
+                const newSet = new Set([...prev])
+                newSet.add(user)
+                return newSet
+            })
+        })
+
+        socket.on("stopTyping", (user:string) => {
+            setIsTyping(prev => {
+                const newSet = new Set([...prev])
+                newSet.delete(user)
+                return newSet
+            })
         })
 
         return () => {
@@ -64,6 +81,8 @@ export function useStartSocket(socket:ReturnType<typeof io>,username:string | un
             socket.off('disconnect');
             socket.off('message');
             socket.off('requestUsers');
+            socket.off('isTyping');
+            socket.off('stopTyping');
             socket.disconnect()
         };
     }, []);
