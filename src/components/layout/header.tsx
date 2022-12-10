@@ -6,6 +6,7 @@ import {userAtom} from "@/global/user.atom";
 import {RESET} from "jotai/utils";
 import {usersAtom} from "@/global/users.atom";
 import {whoIsTypingAtom} from "@/global/isTyping.atom";
+import {messagesAtom} from "@/global/messages.atom";
 
 type props = {
     opened:boolean,
@@ -15,6 +16,7 @@ type props = {
 export function AppHeader({opened,setOpened}:props){
     const socket = useSocket()
     const setUser = useSetAtom(userAtom)
+    const setMessages = useSetAtom(messagesAtom)
     const setUsersList = useSetAtom(usersAtom)
     const setWhoIsTyping = useSetAtom(whoIsTypingAtom)
     return (
@@ -23,6 +25,7 @@ export function AppHeader({opened,setOpened}:props){
                 <Title order={2} size={"h2"} >Chatify</Title>
                 <div>
                     <Button color="red" onClick={() => {
+                        setMessages([])
                         setUser(RESET)
                         setUsersList([])
                         setWhoIsTyping(new Set([]))

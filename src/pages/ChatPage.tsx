@@ -7,7 +7,7 @@ import React, {useState} from "react";
 import {SocketProvider} from "@/global/socketContext";
 
 export function ChatPage(){
-    const [openNavBar,setOpenNavBar] = useState(false)
+    const [openNavBar,setOpenNavBar] = useState(true)
     return (
         <SocketProvider>
             <AppShell

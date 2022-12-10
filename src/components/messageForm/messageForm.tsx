@@ -25,9 +25,6 @@ export function MessageForm(){
             socket.emit('isTyping')
         else
             socket.emit('stopTyping')
-        return () => {
-            socket.emit('stopTyping')
-        }
     },[isTyping])
 
     return (
@@ -59,7 +56,7 @@ function WhoIsTyPing(){
     let msg = `${first} is typing...`
     if (second)
         msg = `${first} and ${second} are typing...`
-    if (whoIsTyping.size > 1)
+    if (whoIsTyping.size > 2)
         msg = `${first}, ${second} and more are typing...`
     return (
         <div>
