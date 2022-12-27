@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useAtom, useSetAtom} from "jotai";
 import {messagesAtom} from "@/global/messages.atom";
 import {Button, Container, Flex, TextInput,Text} from "@mantine/core";
-import {MessageModel} from "../../../../chat-server/src/utils/MessageModel";
+import {MessageModel} from "../../../../chat-server/src/common/models/MessageModel";
 import {useSocket} from "@/global/socketContext";
 import {whoIsTypingAtom} from "@/global/isTyping.atom";
 
